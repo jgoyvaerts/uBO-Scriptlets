@@ -170,7 +170,9 @@
 	  try {
 		  for (const node of nodes) {
 			var value = node.getAttribute('data-src');
-			node.setAttribute('src', value);
+			if(value != null){
+				node.setAttribute('src', value);
+			}
 		  }
 	  } catch { }
 	};
