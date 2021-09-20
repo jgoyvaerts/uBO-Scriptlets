@@ -158,6 +158,42 @@
 		  }
 })();
 
+
+/// fix-img-data-src.js
+/// alias fids.js
+// example.com##+js(fids)
+(() => {
+	'use strict';
+	let selector = 'img';
+	const setattr = () => {
+	  const nodes = document.querySelectorAll(selector);
+	  try {
+		  for (const node of nodes) {
+			var value = node.getAttribute('data-src');
+			node.setAttribute('src', value);
+		  }
+	  } catch { }
+	};
+	const start = ( ) => {
+	console.log("Fixing img data-src");
+	  setattr();
+	  const observer = new MutationObserver(mutationHandler);
+	  observer.observe(document.documentElement, {
+		  attributes: true,
+		  attributeFilter: tokens,
+		  childList: true,
+		  subtree: true,
+	  });
+	};
+	if ( document.readyState !== 'complete') {
+	  window.addEventListener('load', start, { once: true });
+	   } else if ( document.readyState === 'loading' ) {
+	  window.addEventListener('DOMContentLoaded', start, { once: true });
+	   } else {
+	  start();
+	}
+})();
+
 /// create-elem.js
 /// alias ce.js
 // example.com##+js(ce, [selector], display:block !important, div)
